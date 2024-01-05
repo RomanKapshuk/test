@@ -1,7 +1,8 @@
-import 'dart:io';
+ import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:test/keyboard_issue/test_text_form_field.dart';
+
+import 'test_text_form_field.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -35,28 +36,17 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
-
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
-
   @override
-  void dispose() {
-    // WidgetsBinding.instance.removeObserver(this);
-
-    super.dispose();
-  }
-
-  @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     final isBackground = state == AppLifecycleState.resumed || state == AppLifecycleState.inactive;
 
-    if (Platform.isAndroid &&
-        _passwordFocusNode.hasFocus &&
-        state == AppLifecycleState.resumed &&
-        isBackground) {
+    if (Platform.isAndroid && _passwordFocusNode.hasFocus) {
       _passwordFocusNode.unfocus();
     }
+
     super.didChangeAppLifecycleState(state);
   }
 
@@ -67,11 +57,11 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              color: Colors.grey,
-              child: TestBaseTextFormField(
-                controller: _passwordController,
-                focusNode: _passwordFocusNode,
+          Container(
+          color: Colors.grey,
+          child: TextFormField(
+            controller: _passwordController,
+            focusNode: _passwordFocusNode,
               ),
             ),
           ],
