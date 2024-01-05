@@ -33,6 +33,20 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
   // Key visibilityKey = UniqueKey();
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
+  }
+
+  @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     if (Platform.isAndroid && _passwordFocusNode.hasFocus && state == AppLifecycleState.resumed) {
       _passwordFocusNode.unfocus();
