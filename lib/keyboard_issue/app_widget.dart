@@ -48,7 +48,9 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
 
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (Platform.isAndroid && _passwordFocusNode.hasFocus && state == AppLifecycleState.resumed) {
+        final isBackground = state == AppLifecycleState.resumed || state == AppLifecycleState.inactive;
+
+    if (Platform.isAndroid && _passwordFocusNode.hasFocus && state == AppLifecycleState.resumed && isBackground) {
       _passwordFocusNode.unfocus();
     }
     super.didChangeAppLifecycleState(state);
