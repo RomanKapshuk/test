@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'test_text_form_field.dart';
-
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
 
@@ -36,8 +34,6 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
 
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    final isBackground = state == AppLifecycleState.resumed || state == AppLifecycleState.inactive;
-
     if (Platform.isAndroid && _passwordFocusNode.hasFocus && state == AppLifecycleState.resumed) {
       _passwordFocusNode.unfocus();
     }
