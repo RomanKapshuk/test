@@ -1,4 +1,4 @@
- import 'dart:io';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -39,11 +39,12 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
   }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final isBackground = state == AppLifecycleState.resumed || state == AppLifecycleState.inactive;
 
-    if (Platform.isAndroid && _passwordFocusNode.hasFocus) {
+    if (Platform.isAndroid && _passwordFocusNode.hasFocus && isBackground) {
       _passwordFocusNode.unfocus();
     }
 
@@ -57,11 +58,11 @@ class _HomeWidgetState extends State<HomeWidget> with WidgetsBindingObserver {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          Container(
-          color: Colors.grey,
-          child: TextFormField(
-            controller: _passwordController,
-            focusNode: _passwordFocusNode,
+            Container(
+              color: Colors.grey,
+              child: TextFormField(
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
               ),
             ),
           ],

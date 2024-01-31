@@ -8,7 +8,7 @@
             "name": "text_selection",
             "request": "launch",
             "type": "dart",
-            "program": "lib/keyboard_issue/main.dart"
+            "program": "lib/device_info/main.dart"
         },
     ]
 }
